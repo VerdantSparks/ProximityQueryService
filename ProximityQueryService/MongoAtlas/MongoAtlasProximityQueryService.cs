@@ -6,8 +6,12 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
-namespace ProximityQueryService
+namespace ProximityQueryService.MongoAtlas
 {
+    /// <summary>
+    /// We assume your data contains a Geo2DSphere index to work.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class MongoAtlasProximityQueryService<T> : IProximityQueryService<T>
     {
         private const string BaseConnStr = "mongodb+srv://{0}:{1}@{2}/{3}?retryWrites=true&w=majority";

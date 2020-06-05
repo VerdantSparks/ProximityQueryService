@@ -1,4 +1,4 @@
-namespace ProximityQueryService
+namespace ProximityQueryService.MongoAtlas
 {
     public class MongoAtlasProximityQueryServiceFactory
     {
