@@ -5,9 +5,6 @@ namespace ProximityQueryService.Test
     public class Tests
     {
         [Fact]
-        public void Test1()
-        {
-
-        }
+        public void Test1() {}
     }
 }
