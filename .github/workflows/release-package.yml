@@ -1,11 +1,9 @@
 name: .NET Core Package Release
 
 on:
-  push:
+  pull_request:
     branches:
-      - master
-    paths:
-      - 'ProximityQueryService/ProximityQueryService.csproj'
+      - release*
 
 jobs:
   build:
