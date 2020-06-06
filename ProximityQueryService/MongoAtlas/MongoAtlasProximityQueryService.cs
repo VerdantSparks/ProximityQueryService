@@ -70,11 +70,10 @@ namespace ProximityQueryService.MongoAtlas
 
             var results = new List<ProximityQueryResult<T>>();
 
+            //Need to transform back to model object from BsonDocument
             pipeline.ForEach(doc => results.Add(
                                  new ProximityQueryResult<T>(BsonSerializer.Deserialize<T>(doc),
                                                              doc["Distance"].AsDouble)));
-
-            //Need to transform back to model object from BsonDocument
 
             return results;
         }

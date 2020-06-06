@@ -2,9 +2,9 @@ namespace ProximityQueryService.MongoAtlas
 {
     public class MongoAtlasProximityQueryServiceFactory
     {
-        public MongoAtlasProximityQueryService<T> Create<T>(string a, string b, string c, string d)
+        public MongoAtlasProximityQueryService<T> Create<T>(string endpoint, string user, string password, string database)
         {
-            return new MongoAtlasProximityQueryService<T>(a, b, c, d);
+            return new MongoAtlasProximityQueryService<T>(endpoint, user, password, database);
         }
     }
 }
