@@ -1,2 +1,6 @@
-# ProximityQueryService ![.NET Core Package Release](https://github.com/VerdantSparks/ProximityQueryService/workflows/.NET%20Core%20Package%20Release/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/verdantsparks/proximityqueryservice/badge)](https://www.codefactor.io/repository/github/verdantsparks/proximityqueryservice)
- Allows your application to do proximity search against your data. 
+# Proximity Query Service
+
+![.NET Core Package Release](https://github.com/VerdantSparks/ProximityQueryService/workflows/.NET%20Core%20Package%20Release/badge.svg)
+![CodeFactor](https://www.codefactor.io/repository/github/verdantsparks/proximityqueryservice/badge)
+
+Allows your application to do proximity search against your data. 
