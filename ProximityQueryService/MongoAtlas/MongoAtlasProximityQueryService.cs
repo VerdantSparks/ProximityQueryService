@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Security.Authentication;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using DataPersistence.NoSql;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
-namespace ProximityQueryService.MongoAtlas
+namespace LocationData.MongoAtlas
 {
     /// <summary>
     /// We assume your data contains a Geo2DSphere index to work.
@@ -14,28 +13,11 @@ namespace ProximityQueryService.MongoAtlas
     /// <typeparam name="T"></typeparam>
     public class MongoAtlasProximityQueryService<T> : IProximityQueryService<T>
     {
-        private const string BaseConnStr = "mongodb+srv://{0}:{1}@{2}/{3}?retryWrites=true&w=majority";
-        private readonly MongoClient _mongoClient;
+        private readonly MongoAtlasService<T> _mongoAtlasService;
 
-        private readonly string _databaseName;
-
-        public MongoAtlasProximityQueryService(string endpoint, string user, string password, string database)
+        public MongoAtlasProximityQueryService(MongoAtlasService<T> mongoAtlasService)
         {
-            _databaseName = database;
-            _mongoClient = new MongoClient(GetMongoSetting(GetMongoConnStr(endpoint, user, password, database)));
-        }
-
-        private static string GetMongoConnStr(string endpoint, string user, string password, string database)
-        {
-            return string.Format(BaseConnStr, user, UrlEncoder.Create().Encode(password), endpoint, database);
-        }
-
-        private static MongoClientSettings GetMongoSetting(string connStr)
-        {
-            var settings = MongoClientSettings.FromUrl(new MongoUrl(connStr));
-            settings.SslSettings = new SslSettings() {EnabledSslProtocols = SslProtocols.Tls12};
-
-            return settings;
+            _mongoAtlasService = mongoAtlasService;
         }
 
         private static BsonDocument GetGeoNearOptions(double lat, double lon, uint radiusInMeters)
@@ -58,7 +40,7 @@ namespace ProximityQueryService.MongoAtlas
                                                                        string type,
                                                                        ushort limitResultCount = 10)
         {
-            var db = _mongoClient.GetDatabase(_databaseName);
+            var db = _mongoAtlasService.Database;
             var collection = db.GetCollection<T>(type);
 
             // Only MongoDb itself has $geoNear aggregate, since .NET driver lack of this one, we need to send the query by writing BsonDocument ourselves

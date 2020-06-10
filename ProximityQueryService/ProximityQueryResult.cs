@@ -1,4 +1,4 @@
-namespace ProximityQueryService
+namespace LocationData
 {
     public class ProximityQueryResult<T>
     {
