@@ -46,8 +46,8 @@ namespace LocationData.MongoAtlas
             // Only MongoDb itself has $geoNear aggregate, since .NET driver lack of this one, we need to send the query by writing BsonDocument ourselves
 
             var pipeline = await collection.Aggregate()
-                                           .Match(filter)
                                            .AppendStage<BsonDocument>(GetGeoNearOptions(lon, lat, radiusInMeters))
+                                           .Match(new BsonDocument() {{"type", type}})
                                            .Limit(limitResultCount)
                                            .ToListAsync();
 
