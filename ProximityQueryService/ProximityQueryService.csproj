@@ -8,8 +8,7 @@
         <Authors>Ferry To</Authors>
         <Company>VerdantSparks</Company>
         <PackageDescription>
-            This package enable your application to perform proximity query against your data.
-            Currently support MongoDB, more to come in future.
+            This service provide management to VetHospital objects stored in persistent storage
         </PackageDescription>
         <RepositoryUrl>https://github.com/VerdantSparks/ProximityQueryService</RepositoryUrl>
         <RootNamespace>LocationData</RootNamespace>
