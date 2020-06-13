@@ -31,21 +31,22 @@ namespace LocationData.MongoAtlas
 
             var geoNearStage = new BsonDocument() {{"$geoNear", geoNearOptions}};
 
-            return geoNearOptions;
+            return geoNearStage;
         }
 
         public async Task<IEnumerable<ProximityQueryResult<T>>> Nearby(double lon,
                                                                        double lat,
-                                                                       uint radiusInMeters,
-                                                                       string type,
-                                                                       ushort limitResultCount = 10)
+                                                                       ushort radiusInMeters = 1000,
+                                                                       ushort limitResultCount = 10,
+                                                                       string type = "")
         {
-            var db = _mongoAtlasService.Database;
-            var collection = db.GetCollection<T>(type);
+            var collection = _mongoAtlasService.Collection;
 
+            var filter = Builders<T>.Filter.Eq("type", type);
             // Only MongoDb itself has $geoNear aggregate, since .NET driver lack of this one, we need to send the query by writing BsonDocument ourselves
 
             var pipeline = await collection.Aggregate()
+                                           .Match(filter)
                                            .AppendStage<BsonDocument>(GetGeoNearOptions(lon, lat, radiusInMeters))
                                            .Limit(limitResultCount)
                                            .ToListAsync();

@@ -7,8 +7,8 @@ namespace LocationData
     {
         Task<IEnumerable<ProximityQueryResult<T>>> Nearby(double lon,
                                                           double lat,
-                                                          uint radiusInMeters,
-                                                          string type,
-                                                          ushort limitResultCount = 10);
+                                                          ushort radiusInMeters,
+                                                          ushort limitResultCount,
+                                                          string type);
     }
 }
