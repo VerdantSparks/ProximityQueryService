@@ -16,7 +16,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.4" />
-      <PackageReference Include="MongoDB.Driver" Version="2.10.4" />
+      <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
       <PackageReference Include="VerdantSparks.DataPersistence" Version="1.0.0" />
     </ItemGroup>
 
